@@ -1,0 +1,19 @@
+name: Ejecutar pruebas de calculadora
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Descargar el repositorio
+      uses: actions/checkout@v3
+
+    - name: Instalar Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Ejecutar pruebas con unittest
+      run: python -m unittest test_calculadora.py
