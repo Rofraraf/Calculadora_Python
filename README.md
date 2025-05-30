@@ -25,3 +25,9 @@ Las pruebas se desarrollaron con `unittest` y cubren:
 Desde la carpeta del proyecto, ejecutar:
 
 python -m unittest test_calculadora.py
+
+## Automatización con GitHub Actions
+
+Este repositorio incluye un sistema de integración continua configurado con GitHub Actions.
+Cada vez que se sube código, se ejecutan automaticamente todas las pruebas para garantizar que las operaciones matematicas siguen funcionando correctamente.
+El estado y el historial de las ejecuciones pueden verse en la pestaña de Actiones del repositorio.
