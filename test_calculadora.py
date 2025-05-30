@@ -58,17 +58,7 @@ class TestCalculadora(unittest.TestCase):
         
         resultado = self.calc.dividir(1e308, 1e-10)
         self.assertTrue(math.isinf(resultado))
-    
-    def test_suma_con_none(self):
-        """Prueba que verifica que pasar 'None' como uno de los argumentos lanza un TypeError
-        
-        Ejemplo práctico:
-        - Una función espera 2 numeros, pero recibe un valor sin inicializar
-        Python debe avisar que no se puede operar con 'None'."""
-        
-        with self.assertRaises(TypeError):
-            self.calc.sumar(None, 5)
-            
+               
     def test_division_con_cadena(self):
         """Verificamos que pasar texto como número lanza un TypeError
         
@@ -90,5 +80,38 @@ class TestCalculadora(unittest.TestCase):
         resultado = self.calc.dividir(1.123456789, 3.000000001)
         self.assertAlmostEqual(resultado, 0.374485595, places=6)
         
+         
+    def test_suma_con_none(self):
+        """Prueba que verifica que pasar 'None' como uno de los argumentos lanza un TypeError
+        
+        Ejemplo práctico:
+        - Una función espera 2 numeros, pero recibe un valor sin inicializar
+        Python debe avisar que no se puede operar con 'None'."""
+        
+        with self.assertRaises(TypeError):
+            self.calc.sumar(None, 5)
+    
+    def test_operaciones_con_infinito(self):
+        """Comprueba como se ocmporta la calculadora al operar con valores extremos como infinito
+        
+        Ejemplo práctico:
+        - En cáculos cientificos o económicos se pueden manejar número muy grandes. Sumar infinito
+        a cualquier numero da infinito, pero restar infinito con infinito, o multiplicar infinito por 0,
+        devuelve NaN (resultado indefinido)"""
+        self.assertEqual(self.calc.sumar(float('inf'), 10), float('inf'))
+        self.assertEqual(self.calc.restar(float('inf'), float('inf')), float('nan'))  # Infinito - Infinito es indefinido
+        self.assertEqual(self.calc.multiplicar(float('inf'), 0), float('nan'))  # Infinito * 0 es indefinido
+
+    def test_operaciones_con_nan(self):
+        """Verifica que cualquier operación con un valor NaN devuelve otro NaN
+        
+        Ejemplo práctico:
+        - En estadísticas, si no hay datos suficientes o se produce una división mal definida, puede aparecer el valor NaN (not a number).
+        En Python, si un número es NaN, cualquier operación que lo incluya también dará como resultado NaN"""
+
+        nan_value = float('nan')
+        self.assertTrue(math.isnan(self.calc.sumar(nan_value, 5)))
+        self.assertTrue(math.isnan(self.calc.multiplicar(nan_value, 5)))
+
 if __name__ == '__main__':
     unittest.main()
