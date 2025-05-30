@@ -92,7 +92,7 @@ class TestCalculadora(unittest.TestCase):
             self.calc.sumar(None, 5)
     
     def test_operaciones_con_infinito(self):
-        """Comprueba como se ocmporta la calculadora al operar con valores extremos como infinito
+        """Comprueba como se comporta la calculadora al operar con valores extremos como infinito
         
         Ejemplo práctico:
         - En cáculos cientificos o económicos se pueden manejar número muy grandes. Sumar infinito
@@ -100,7 +100,7 @@ class TestCalculadora(unittest.TestCase):
         devuelve NaN (resultado indefinido)"""
         self.assertEqual(self.calc.sumar(float('inf'), 10), float('inf'))
         self.assertTrue(math.isnan(self.calc.restar(float('inf'), float('inf'))))
-        self.assertEqual(self.calc.multiplicar(float('inf'), 0), float('nan'))  # Infinito * 0 es indefinido
+        self.assertTrue(math.isnan(self.calc.multiplicar(float('inf'), 0)))
 
     def test_operaciones_con_nan(self):
         """Verifica que cualquier operación con un valor NaN devuelve otro NaN
