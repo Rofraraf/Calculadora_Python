@@ -99,7 +99,7 @@ class TestCalculadora(unittest.TestCase):
         a cualquier numero da infinito, pero restar infinito con infinito, o multiplicar infinito por 0,
         devuelve NaN (resultado indefinido)"""
         self.assertEqual(self.calc.sumar(float('inf'), 10), float('inf'))
-        self.assertEqual(self.calc.restar(float('inf'), float('inf')), float('nan'))  # Infinito - Infinito es indefinido
+        self.assertTrue(math.isnan(self.calc.restar(float('inf'), float('inf'))))
         self.assertEqual(self.calc.multiplicar(float('inf'), 0), float('nan'))  # Infinito * 0 es indefinido
 
     def test_operaciones_con_nan(self):
